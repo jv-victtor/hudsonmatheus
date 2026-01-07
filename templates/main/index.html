@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hudson Matheus</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="logo"> <a href="#home" class="logo-icon">H.M</a> </div>
+      <nav class="main-nav">
+        <a class="nav-item active" href="#home">Início</a>
+        <a class="nav-item" href="#conquistas">Conquistas</a>
+        <a class="nav-item" href="#noticias">Notícias</a>
+        <a class="nav-item" href="#contato">Contato</a>
+      </nav>
+      <div class="phone"> (84) 9 9933-1686</div>
+    </header>
+
+    <main id="home" class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="portrait"></div>
+        <h1 class="hero-name">{{ name }}</h1>
+        <div class="ribbon">{{ rank }}</div>
+        <p class="quote">{{ quote }}</p>
+
+        <div class="cta-row">
+          <a class="cta" href="#biografia"><span>Biografia</span></a>
+          <a class="cta active" href="#conquistas"><span>Conquistas</span></a>
+          <a class="cta" href="#noticias"><span>Noticias</span></a>
+        </div>
+      </div>
+    </main>
+
+    <nav class="mobile-bottom">
+      <a class="mb-item active" href="#home">Início</a>
+      <a class="mb-item" href="#conquistas">Conquistas</a>
+      <a class="mb-item" href="#noticias">Noticias</a>
+      <a class="mb-item" href="#contato">Contato</a>
+    </nav>
+
+    <section id="conquistas" class="section conquistas">
+      <div class="section-inner">
+        <h2 class="section-title">Conquistas</h2>
+        <div class="cards">
+          <div class="card">
+            <div class="card-icon">🏆</div>
+            <div class="card-body">
+              <h3>Campeonato Estadual</h3>
+              <p>Ano: 2023 — Categoria: Faixa Preta</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-icon">🥇</div>
+            <div class="card-body">
+              <h3>Campeão Regional</h3>
+              <p>Ano: 2022 — Destaque em técnica e disciplina</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-icon">🎖️</div>
+            <div class="card-body">
+              <h3>Medalha de Honra</h3>
+              <p>Reconhecimento por contribuição à comunidade</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="noticias" class="section noticias">
+      <div class="section-inner">
+        <h2 class="section-title">Notícias</h2>
+        <div class="news-list">
+          <article class="news-item">
+            <h3>Novas turmas iniciam em Março</h3>
+            <p>Inscrições abertas para iniciantes e avançados. Contato para mais informações.</p>
+          </article>
+          <article class="news-item">
+            <h3>Workshop com mestre convidado</h3>
+            <p>Evento especial com demonstrações e aulas práticas para alunos.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="section contato">
+      <div class="section-inner">
+        <h2 class="section-title">Contato</h2>
+        <p>Telefone: (11) 99999-9999 — Email: contato@exemplo.com</p>
+      </div>
+    </section>
+
+    <script>
+      // Simple scrollspy: highlight nav items while scrolling
+      (function(){
+        const navItems = document.querySelectorAll('.main-nav .nav-item');
+        const mobileItems = document.querySelectorAll('.mobile-bottom .mb-item');
+        const sections = Array.from(document.querySelectorAll('section, main#home'));
+        function setActive(id){
+          navItems.forEach(a=>{ if(a.getAttribute('href')===('#'+id)) { a.classList.add('active'); } else { a.classList.remove('active'); }});
+          mobileItems.forEach(a=>{ if(a.getAttribute('href')===('#'+id)) { a.classList.add('active'); } else { a.classList.remove('active'); }});
+        }
+
+        function onScroll(){
+          const topOffset = 80; // some offset to trigger earlier
+          const y = window.scrollY + topOffset;
+          let current = sections[0];
+          for(const s of sections){
+            if(s.offsetTop <= y) current = s;
+          }
+          setActive(current.id || 'home');
+        }
+
+        // attach click listeners to nav to close mobile highlight
+        document.querySelectorAll('.main-nav a, .mobile-bottom a, .cta').forEach(el=>{
+          el.addEventListener('click', (e)=>{
+            // allow default anchor behavior (smooth scroll via CSS)
+          });
+        });
+
+        window.addEventListener('scroll', onScroll, {passive:true});
+        document.addEventListener('DOMContentLoaded', onScroll);
+      })();
+    </script>

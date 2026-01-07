@@ -8,4 +8,4 @@ def home(request):
         'quote': '"Disciplina, honra e respeito."',
         'active': 'conquistas',
     }
-    return render(request, 'main/docs/index.html', context)
+    return render(request, 'main/index.html', context)
